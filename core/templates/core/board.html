@@ -1,11 +1,26 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block main %}
 
 <div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
+    <a href="{% url 'logout' %}" class="menu">Logout</a>
 
     <div class="icon-and-title-flex">
-        <h1>Board</h1>
+        <div class="title-container">
+            <img src="{% static 'img/entrapa_product.png' %}" class="appicon">
+            <span class="text-title">Entrada de produtos</span>
+        </div>
+
+        <div class="title-container">
+            <img src="{% static 'img/vendas.png' %}" class="appicon">
+            <span class="text-title">Entrada de produtos</span>
+        </div>
+
+        <div class="title-container">
+            <img src="{% static 'img/report.png' %}" class="appicon">
+            <span class="text-title">Relatórios</span>
+        </div>
     </div>
 </div>
 

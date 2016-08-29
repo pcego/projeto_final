@@ -190,7 +190,7 @@ a:active
 
 .text-title
 {
-	font-size: 2.5em;
+	font-size: 1.5em;
 	font-weight: 300;
 	color: #555;
 }
@@ -404,3 +404,14 @@ a:active
 		height: 120px;
 	}
 }
+
+.menu
+{
+    border:1px solid #333;
+    display:block;
+    float: right;
+    line-height:38px;
+    margin:0 0 0 3px;
+    padding:3px;
+    position:relative;
+ }
