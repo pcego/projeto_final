@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<!-- CHANGE TITLE AND META ACCORDINGLY -->
-		<title>Faiz Malkani App</title>
+		<title>{% block title %}Sistema modelo de gestão de estoque{% endblock %}</title>
 		<meta name="description" content="Sistema modelo de gestão de estoque usando Python e Django">
 		<meta name="keywords" content="Gestão, estoque, Python, Django, HTML5, CSS3">
 		<meta name="copyright" content="Livre distribuição">
@@ -22,61 +22,28 @@
 	<body>
 
 		<div class="container" style="width: 100%">
-			<!-- COVER IMAGE AND FLOATING BUTTON -->
-			<div class="cover-image"></div>
-			<div class="desktop-fab-container ">
-				<!-- REPLACE WITH YOUR APP URL -->
-     			<a href="YOUR_APP_URL_HERE">
-     				<paper-fab class="wow fadeInUp desktop-fab" icon="shop"></paper-fab>
-     			</a>
-			</div>
 
-			<!-- ICON, NAME AND DESCRIPTION -->
-			<div class="wow fadeInUp content-card">
-				<!-- REPLACE WITH YOUR APP URL -->
-				<a href="YOUR_APP_URL_HERE">
-					<paper-fab class="mobile-fab" icon="shop"></paper-fab>
-				</a>
+            <div class="cover-image"></div>
+            {% block main %}
 
-				<div class="icon-and-title-flex">
-					<img src="{% static 'img/ic_launcher.png' %}" class="appicon"></img>
-					<div class="title-container">
-						<!-- REPLACE WITH YOUR APP NAME -->
-						<span class="text-title">AppSite</span>
-						<br><div class="intertext-padding"></div>
-						<!-- REPLACE WITH YOUR DEV NAME -->
-						<span class="text-subtitle">by Faiz Malkani</span>
-						<br><div class="intertext-padding"></div>
-						<!-- REPLACE WITH YOUR APP PRICE -->
-						<span class="text-subtitle">$1.99</span>
-					</div>
-				</div><br><br>
-				<!-- REPLACE WITH YOUR APP DESCRIPTION -->
-				<span class="text-description" style="font-size: 1.1em">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida tristique condimentum.
-                    Quisque tempus eleifend sollicitudin. Nulla congue in erat et euismod.
-                    Nulla pellentesque leo id dui tempor lobortis. Phasellus sollicitudin ut massa eu dictum.
-                    Pellentesque viverra a diam a feugiat. Morbi non lorem et ex finibus elementum.
-                    Morbi pharetra risus eget quam pellentesque, sed laoreet purus malesuada.
-                    Aenean ut nibh quis lacus mollis euismod. Maecenas pellentesque magna vehicula convallis hendrerit.
-                    Sed maximus urna sed suscipit facilisis. Aenean posuere, ligula quis fermentum vulputate, quam nisi
-                    pulvinar felis, et sodales ligula augue sit amet nunc. Curabitur eget orci et tortor rhoncus
-                    consequat et id nunc.
-			</div>
 
-		{% block footer %}
-			<!-- SPACE BELOW DETAILS -->
-			<div class="empty-space">
-				<div class="meta-container wow fadeInUp">
-					<div class="wow fadeInUp detail-item watermark credits">
-							<span class="text-description credits-text" style="color: #ffffff">Sistema modelo de gestão de estoque
-								<a href="http://faizmalkani.com" style="color: #fff; font-weight: 700">Faiz Malkani</a>
-							</span>
-					</div>
-				</div>
-			</div>
-		{% endblock %}
+            {% endblock %}
 
+            {% block footer %}
+                <!-- SPACE BELOW DETAILS -->
+                <div class="empty-space">
+                    <div class="meta-container wow fadeInUp">
+                        <div class="wow fadeInUp detail-item watermark credits">
+                                <span class="text-description credits-text" style="color: #ffffff">Sistema modelo de gestão de
+                                    <a href="github.com/gpzim98/estoque" style="color: #fff; font-weight: 700">estoque</a>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+
+        </div>
 		<!-- ===================================================================================================== -->
 
 		<!-- JAVASCRIPT -->

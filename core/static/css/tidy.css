@@ -67,10 +67,10 @@ a:active
 
 .content-card	
 {
-	width: 60%; 
+	width: 90%;
 	background-color: #fff; 
 	margin: auto; 
-	margin-top: 15%; 
+	margin-top: 5%;
 	position: relative; 
 	padding: 50px;
     border-top-left-radius: 2px;
@@ -154,7 +154,7 @@ a:active
 
 .cover-image 
 {
-	background-image:url(../img/appsite_hero.png);
+	background-image:url(../img/background.png);
 	background-size:cover;
 	background-position:center;
 	height:100%;
