@@ -2,80 +2,60 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-- CHANGE TITLE AND META ACCORDINGLY -->
-		<title>{% block title %}Sistema modelo de gestão de estoque{% endblock %}</title>
-		<meta name="description" content="Sistema modelo de gestão de estoque usando Python e Django">
-		<meta name="keywords" content="Gestão, estoque, Python, Django, HTML5, CSS3">
-		<meta name="copyright" content="Livre distribuição">
-		<meta name="author" content="Gregory Pacheco">
-		<meta name="theme-color" content="#ffffff">
-		<meta content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" name="viewport">
-		<link rel="stylesheet" href="{% static 'css/tidy.css' %}">
-		<link rel="stylesheet" href="{% static 'css/animate.css' %}">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
-		<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
-        <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	<body>
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <title>{% block title %}Sistema modelo de gestão de estoque{% endblock %}</title>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-		<div class="container" style="width: 100%">
+<body>
 
-            <div class="cover-image"></div>
+    <div class="navbar-fixed teal lighten-2">
+        <nav>
+            <div class="nav-wrapper">
+              <a href="/" class="brand-logo">Estoque</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                {% block menu %}
+                {% endblock %}
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                {% block menu_mobile %}
+                {% endblock %}
 
-            {% block main %}
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+    </div>
 
 
-            {% endblock %}
-
-            {% block footer %}
-                <!-- SPACE BELOW DETAILS -->
-                <div class="empty-space">
-                    <div class="meta-container wow fadeInUp">
-                        <div class="wow fadeInUp detail-item watermark credits">
-                                <span class="text-description credits-text" style="color: #ffffff">Sistema modelo de gestão de
-                                    <a href="github.com/gpzim98/estoque" style="color: #fff; font-weight: 700">estoque</a>
-                                </span>
-                        </div>
-                    </div>
-                </div>
-            {% endblock %}
-
-
-        </div>
-		<!-- ===================================================================================================== -->
-
-		<!-- JAVASCRIPT -->
-
-		<!-- Animations -->
-		<script src="{% static 'js/wow.min.js' %}"></script>
-		<script>
-			new WOW().init();
-		</script>
-
-		<!-- Scrollwheel Smoothing -->
-		<script>
-			$(function()
-			{
-				var $window = $(window);
-				var scrollTime = 0.2;
-				var scrollDistance = 270;
-				$window.on("mousewheel DOMMouseScroll", function(event)
-				{
-
-					event.preventDefault();
-					var delta = event.originalEvent.wheelDelta/120 || -event.originalEvent.detail/3;
-					var scrollTop = $window.scrollTop();
-					var finalScroll = scrollTop - parseInt(delta*scrollDistance);
-					TweenMax.to($window, scrollTime,
-					{
-						scrollTo : { y: finalScroll, autoKill:true }, ease: Power1.easeOut, overwrite: 5
-
-					});
-				});
-			});
-		</script>
-	</body>
+    <div class="container">
+        {% block main%}
+        {% endblock %}
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type='text/javascript'>
+            $(".button-collapse").sideNav();
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+    </script>
+</body>
 </html>

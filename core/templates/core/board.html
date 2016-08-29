@@ -3,25 +3,50 @@
 
 {% block main %}
 
-<div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
-    <a href="{% url 'logout' %}" class="menu">Logout</a>
 
-    <div class="icon-and-title-flex">
-        <div class="title-container">
-            <img src="{% static 'img/entrapa_product.png' %}" class="appicon">
-            <span class="text-title">Entrada de produtos</span>
-        </div>
+<div class="row">
+      <div class="col s6">
+          <a href="{% url 'url_core_products' %}">
+             <img src="{% static 'img/products.png' %}" class="appicon">
+             <h5>Cadastro de produtos</h5>
+          </a>
+      </div>
 
-        <div class="title-container">
-            <img src="{% static 'img/vendas.png' %}" class="appicon">
-            <span class="text-title">Entrada de produtos</span>
-        </div>
-
-        <div class="title-container">
-            <img src="{% static 'img/report.png' %}" class="appicon">
-            <span class="text-title">Relatórios</span>
-        </div>
+    <div class="col s6">
+        <a href="{% url 'url_core_entrance' %}">
+            <img src="{% static 'img/product_entrance.png' %}" class="appicon">
+            <h5>Entrada de produtos</h5>
+        </a>
     </div>
+</div>
+
+
+<div class="row">
+      <div class="col s6">
+          <a href="">
+            <img src="{% static 'img/sales.png' %}" class="appicon">
+            <h5>Vendas</h5>
+          </a>
+      </div>
+      <div class="col s6">
+          <a href="">
+            <img src="{% static 'img/report.png' %}" class="appicon">
+            <h5>Relatórios</h5>
+           </a>
+      </div>
+</div>
+
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+<a class="btn-floating btn-large red">
+  <i class="large material-icons">mode_edit</i>
+</a>
+<ul>
+  <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+  <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+  <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+  <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+</ul>
 </div>
 
 {% endblock %}

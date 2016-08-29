@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block main %}
+
+<div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
+    <table>
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="barcode">Código de barras</th>
+                <th data-field="description">Descrição</th>
+                <th data-field="price">Preço</th>
+                <th data-field="edit">Editar</th>
+            </tr>
+        </thead>
+
+    <tbody>
+    {% for product in product_list %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.bar_code}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.price}}</td>
+            <td>
+                <a href="{% url 'url_core_product_update' product.id %}">
+                      <i class="material-icons">edit</i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+<a class="btn-floating btn-large red">
+  <i class="large material-icons">mode_edit</i>
+</a>
+<ul>
+  <li><a href="{% url 'url_core_products_create' %}" class="btn-floating red"><i class="material-icons">add</i></a></li>
+  <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+  <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+  <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+</ul>
+</div>
+{% endblock %}
+
