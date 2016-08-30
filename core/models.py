@@ -22,7 +22,7 @@ class Entrance(models.Model):
     def total(self):
         """This property will return the value amount of each entrance"""
         total_sum = ProductEntrance.objects.filter(entrance__id=self.id).aggregate(Sum('price'))
-        return total_sum['price__sum']
+        return total_sum['price__sum'] if total_sum['price__sum'] else 0.00
 
 
 class ProductEntrance(models.Model):

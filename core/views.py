@@ -95,10 +95,25 @@ def entrance_product_insert(request, id):
         if form_product_entrance.is_valid():
             product_entrance = form_product_entrance.save(commit=False)
             product_entrance.entrance = entrance
-            product_entrance.save()
+            product_entrance_insert_or_group(product_entrance)
             return redirect('url_core_entrance_product_insert', id=entrance.id)
 
     return render(request, 'core/entrance_form.html', data)
+
+
+def product_entrance_insert_or_group(product_entrance):
+    """This function will be used to group products in the Entrance
+       If already there is this product in the Entrance List, it will increment the quantity and
+       update the price
+    """
+    product = ProductEntrance.objects.filter(product=product_entrance.product, entrance=product_entrance.entrance)
+
+    if product:
+        product[0].quantity += product_entrance.quantity
+        product[0].price = product_entrance.price
+        product[0].save()
+    else:
+        product_entrance.save()
 
 
 @login_required()
