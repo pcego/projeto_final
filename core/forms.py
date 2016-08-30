@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from core.models import Product, Entrance, ProductEntrance
+from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale
 
 
 class ProductForm(ModelForm):
@@ -17,4 +17,16 @@ class EntranceForm(ModelForm):
 class ProductEntranceForm(ModelForm):
     class Meta:
         model = ProductEntrance
-        fields = ['quantity', 'product', 'price']
+        fields = ['product', 'quantity',  'price']
+
+
+class SaleForm(ModelForm):
+    class Meta:
+        model = Sale
+        fields = ['sale_number', 'date', 'discount']
+
+
+class ProductSaleForm(ModelForm):
+    class Meta:
+        model = ProductSale
+        fields = ['product', 'quantity']

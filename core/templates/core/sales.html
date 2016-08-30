@@ -6,21 +6,21 @@
     <table>
         <thead>
             <tr>
-                <th data-field="barcode">Número do documento</th>
-                <th data-field="date">Data</th>
-                <th data-field="total">Total</th>
+                <th data-field="barcode">Número da venda</th>
+                <th data-field="description">Data</th>
+                <th data-field="description">Total</th>
                 <th data-field="edit">Editar</th>
             </tr>
         </thead>
 
     <tbody>
-    {% for entrance in entrances_list %}
+    {% for sale in sales_list %}
         <tr>
-            <td>{{entrance.document_number}}</td>
-            <td>{{entrance.date}}</td>
-            <td>{{entrance.total}}</td>
+            <td>{{sale.sale_number}}</td>
+            <td>{{sale.date}}</td>
+            <td>{{sale.total}}</td>
             <td>
-                <a href="{% url 'url_core_entrance_product_insert' entrance.id %}">
+                <a href="{% url 'url_core_sale_product_insert' sale.id %}">
                       <i class="material-icons">edit</i>
                 </a>
             </td>

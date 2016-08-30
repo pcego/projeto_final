@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block main %}
+
+<dir class="row">
+    {% if erros %}
+        <div class="alert alert-danger fade in">
+                {{erros}}
+        </div>
+    {% endif %}
+
+    <div class="chip">
+        Total da nota: R$ {{sale.total}}
+    </div>
+
+    <form action="{% url 'url_core_sale_update' sale.id %}" method="POST">
+        <h4 class="header">Cabeçalho da entrada</h4>
+        {% csrf_token %}
+        {{form_sale}}
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">Salvar cabeçalho
+            <i class="material-icons right">send</i>
+        </button>
+
+    </form>
+
+    <form method="POST">
+        <h4 class="header">Itens da entrada</h4>
+        {%csrf_token%}
+        {{form_product_sale}}
+
+        <div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-field="id_product">Id. produto</th>
+                        <th data-field="description">Descrição</th>
+                        <th data-field="qunatity">Quantidade</th>
+                        <th data-field="price">Price</th>
+                        <th data-field="edit">Delete</th>
+                    </tr>
+                </thead>
+
+            <tbody>
+            {% for sale_product in sale_product_list %}
+                <tr>
+                    <td>{{sale_product.product.id}}</td>
+                    <td>{{sale_product.product.description}}</td>
+                    <td>{{sale_product.quantity}}</td>
+                    <td>{{sale_product.product.price}}</td>
+                    <td>
+                        <a href="{% url 'url_core_sale_product_delete' sale_product.id %}">
+                              <i class="material-icons red">remove</i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">Adicionar item
+            <i class="material-icons right">send</i>
+        </button>
+
+    </form>
+</dir>
+
+{% endblock %}

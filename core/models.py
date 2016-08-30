@@ -21,8 +21,11 @@ class Entrance(models.Model):
     @property
     def total(self):
         """This property will return the value amount of each entrance"""
-        total_sum = ProductEntrance.objects.filter(entrance__id=self.id).aggregate(Sum('price'))
-        return total_sum['price__sum'] if total_sum['price__sum'] else 0.00
+        total_sum = 0
+        entrance_products = ProductEntrance.objects.filter(entrance__id=self.id)
+        for item in entrance_products:
+            total_sum += item.price * item.quantity
+        return total_sum
 
 
 class ProductEntrance(models.Model):
@@ -33,3 +36,27 @@ class ProductEntrance(models.Model):
 
     def __str__(self):
         return self.product.description
+
+
+class Sale(models.Model):
+    sale_number = models.CharField(max_length=20)
+    date = models.DateField()
+    discount = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.sale_number
+
+    @property
+    def total(self):
+        """This property will return the value amount of this sale"""
+        total_sum = 0
+        products = ProductSale.objects.filter(sale__id=self.id)
+        for item in products:
+            total_sum += item.product.price * item.quantity
+        return total_sum
+
+
+class ProductSale(models.Model):
+    product = models.ForeignKey(Product)
+    quantity = models.IntegerField()
+    sale = models.ForeignKey(Sale)

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from core.models import Product, Entrance, ProductEntrance
-from core.forms import ProductForm, EntranceForm, ProductEntranceForm
+from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale
+from core.forms import ProductForm, EntranceForm, ProductEntranceForm, SaleForm, ProductSaleForm
 
 
 def home(request):
@@ -133,3 +133,78 @@ def entrance_delete(request, id, template_name='core/entrance_confirm_delete.htm
         entrance.delete()
         return redirect('url_core_entrance')
     return render(request, template_name, {'object': entrance})
+
+
+@login_required()
+def sales(request):
+    data = {'sales_list': Sale.objects.all()}
+    return render(request, 'core/sales.html', data)
+
+
+@login_required()
+def sale_create(request, template_name='core/sale_form_create.html'):
+    form_sale = SaleForm(request.POST or None)
+
+    if form_sale.is_valid():
+        sale = form_sale.save(commit=False)
+        sale.save()
+        return redirect('url_core_sale_product_insert', id=sale.id)
+    return render(request, template_name, {'form_entrance': form_sale})
+
+
+@login_required()
+def sale_product_insert(request, id):
+    data = {}
+
+    sale = get_object_or_404(Sale, id=id)
+    data['sale'] = sale
+    data['sale_product_list'] = ProductSale.objects.filter(sale=sale)
+
+    form_sale = SaleForm(instance=sale)
+    data['form_sale'] = form_sale
+
+    form_product_sale = ProductSaleForm(request.POST or None)
+    data['form_product_sale'] = form_product_sale
+
+    if request.method == 'POST':
+        if form_product_sale.is_valid():
+            product_sale = form_product_sale.save(commit=False)
+            product_sale.sale = sale
+            product_sale_insert_or_group(product_sale)
+            return redirect('url_core_sale_product_insert', id=sale.id)
+
+    return render(request, 'core/sale_form.html', data)
+
+
+def product_sale_insert_or_group(product_sale):
+    """
+       This function will be used to group products in the Sale
+       If already there is this product in the Sale List, it will increment the quantity
+    """
+    product = ProductSale.objects.filter(product=product_sale.product, sale=product_sale.sale)
+
+    if product:
+        product[0].quantity += product_sale.quantity
+        product[0].save()
+    else:
+        product_sale.save()
+
+
+@login_required()
+def sale_update(request, id, template_name='core/sale_form_create.html'):
+    sale = get_object_or_404(Sale, id=id)
+    form = SaleForm(request.POST or None, instance=sale)
+    if form.is_valid():
+        form.save()
+        return redirect('url_core_sale_product_insert', id=sale.id)
+    return render(request, template_name, {'form_sale': form, 'sale': sale})
+
+
+@login_required()
+def sale_product_delete(request, id):
+    product_sale = get_object_or_404(ProductSale, id=id)
+
+    sale_id = product_sale.sale.id
+
+    product_sale.delete()
+    return redirect('url_core_sale_product_insert', id=sale_id)
