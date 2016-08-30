@@ -102,6 +102,16 @@ def entrance_product_insert(request, id):
 
 
 @login_required()
+def entrance_product_delete(request, id):
+    product_entrance = get_object_or_404(ProductEntrance, id=id)
+
+    entrance_id = product_entrance.entrance.id
+
+    product_entrance.delete()
+    return redirect('url_core_entrance_product_insert', id=entrance_id)
+
+
+@login_required()
 def entrance_delete(request, id, template_name='core/entrance_confirm_delete.html'):
     entrance = get_object_or_404(Entrance, id=id)
     if request.method == 'POST':

@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from core.views import home, board, entrances, products, product_update, product_create, product_delete, entrance_create, \
-    entrance_product_insert, entrance_delete, entrance_update
+    entrance_product_insert, entrance_delete, entrance_update, entrance_product_delete
 
 urlpatterns = [
     url(r'^$', home, name='url_core_home'),
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^entrances/$', entrances, name='url_core_entrance'),
     url(r'^entrance-create/$', entrance_create, name='url_core_entrance_create'),
     url(r'^entrance-update/(?P<id>\d+)$', entrance_update, name='url_core_entrance_update'),
-    url(r'^entrance-product-insert/(?P<id>\d+)$', entrance_product_insert, name='url_core_entrance_product_insert'),
     url(r'^entrance-delete/(?P<id>\d+)$', entrance_delete, name='url_core_entrance_delete'),
+    url(r'^entrance-product-insert/(?P<id>\d+)$', entrance_product_insert, name='url_core_entrance_product_insert'),
+    url(r'^entrance-product-delete/(?P<id>\d+)$', entrance_product_delete, name='url_core_entrance_product_delete'),
 ]

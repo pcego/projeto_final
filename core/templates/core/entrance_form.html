@@ -10,6 +10,10 @@
         </div>
     {% endif %}
 
+    <div class="chip">
+        Total da nota: R$ {{entrance.total}}
+    </div>
+
     <form action="{% url 'url_core_entrance_update' entrance.id %}" method="POST">
         <h4 class="header">Cabeçalho da entrada</h4>
         {% csrf_token %}
@@ -30,8 +34,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th data-field="barcode">Produto</th>
-                        <th data-field="description">Quantidade</th>
+                        <th data-field="id_product">Id. produto</th>
+                        <th data-field="description">Descrição</th>
+                        <th data-field="qunatity">Quantidade</th>
+                        <th data-field="price">Price</th>
                         <th data-field="edit">Delete</th>
                     </tr>
                 </thead>
@@ -39,11 +45,13 @@
             <tbody>
             {% for entrance_product in entrance_product_list %}
                 <tr>
-                    <td>{{entrance_product.quantity}}</td>
+                    <td>{{entrance_product.product.id}}</td>
                     <td>{{entrance_product.product.description}}</td>
+                    <td>{{entrance_product.quantity}}</td>
+                    <td>{{entrance_product.price}}</td>
                     <td>
-                        <a href="{% url 'url_core_entrance_product_insert' entrance_product.id %}">
-                              <i class="material-icons">edit</i>
+                        <a href="{% url 'url_core_entrance_product_delete' entrance_product.id %}">
+                              <i class="material-icons red">remove</i>
                         </a>
                     </td>
                 </tr>

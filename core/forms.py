@@ -17,4 +17,4 @@ class EntranceForm(ModelForm):
 class ProductEntranceForm(ModelForm):
     class Meta:
         model = ProductEntrance
-        fields = ['quantity', 'product']
+        fields = ['quantity', 'product', 'price']
