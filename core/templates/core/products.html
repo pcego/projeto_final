@@ -10,6 +10,7 @@
                 <th data-field="barcode">Código de barras</th>
                 <th data-field="description">Descrição</th>
                 <th data-field="price">Preço</th>
+                <th data-field="stoq">Estoque</th>
                 <th data-field="edit">Editar</th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@
             <td>{{product.bar_code}}</td>
             <td>{{product.description}}</td>
             <td>{{product.price}}</td>
+            <td>{{product.stoq}}</td>
             <td>
                 <a href="{% url 'url_core_product_update' product.id %}">
                       <i class="material-icons">edit</i>

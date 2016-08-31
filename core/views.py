@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale
 from core.forms import ProductForm, EntranceForm, ProductEntranceForm, SaleForm, ProductSaleForm
+import datetime
+now = datetime.datetime.now()
 
 
 def home(request):
@@ -149,7 +151,7 @@ def sale_create(request, template_name='core/sale_form_create.html'):
         sale = form_sale.save(commit=False)
         sale.save()
         return redirect('url_core_sale_product_insert', id=sale.id)
-    return render(request, template_name, {'form_entrance': form_sale})
+    return render(request, template_name, {'form_sale': form_sale})
 
 
 @login_required()
@@ -208,3 +210,12 @@ def sale_product_delete(request, id):
 
     product_sale.delete()
     return redirect('url_core_sale_product_insert', id=sale_id)
+
+
+@login_required()
+def reports(request):
+    data = {}
+    month = request.POST.get('selected_month', 1)
+    data['total_sales'] = Sale.sales_per_month(month)
+    data['total_entrances'] = Entrance.entrances_per_month(month)
+    return render(request, 'core/reports.html', data)

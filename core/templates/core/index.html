@@ -1,12 +1,32 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
-{% block main %}
+{% block paralax %}
+<main>
+    <div class="parallax-container">
+        <div class="parallax">
+            <img src="{% static 'img/background.jpg' %}">
+        </div>
+    </div>
 
-<dir class="row">
-    <h1>Seja bem vindo ao <i>Estoque</i></h1>
-    <h5>sistema modelo de gestão de estoque baseado em Python e Django</h5>
-    <h6>Este template é baseado no <a href="http://materializecss.com/">Google Materials</a></h6    >
-</dir>
-
+    <div class="section white">
+        <div class="row container">
+            <h2 class="header">Estoque</h2>
+            <p class="grey-text text-darken-3 lighten-3">
+                Sistema modelo de gestão de estoque baseado em Python e Django
+            </p>
+        </div>
+    </div>
+        <div class="parallax-container">
+        <div class="parallax">
+            <img src="{% static 'img/background2.jpg' %}">
+        </div>
+    </div>
+</main>
 {% endblock %}
 
+{% block main %}
+{% endblock %}
+
+{% block floating_menu %}
+{% endblock %}

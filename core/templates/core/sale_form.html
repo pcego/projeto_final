@@ -15,7 +15,7 @@
     </div>
 
     <form action="{% url 'url_core_sale_update' sale.id %}" method="POST">
-        <h4 class="header">Cabeçalho da entrada</h4>
+        <h4 class="header">Cabeçalho da venda</h4>
         {% csrf_token %}
         {{form_sale}}
 
@@ -26,7 +26,7 @@
     </form>
 
     <form method="POST">
-        <h4 class="header">Itens da entrada</h4>
+        <h4 class="header">Itens da venda</h4>
         {%csrf_token%}
         {{form_product_sale}}
 
