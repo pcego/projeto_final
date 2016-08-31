@@ -1,11 +1,11 @@
 from django.forms import ModelForm
-from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale
+from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale, Supplier
 
 
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['bar_code', 'description', 'price']
+        fields = ['bar_code', 'description', 'price', 'supplier']
 
 
 class EntranceForm(ModelForm):
@@ -30,3 +30,9 @@ class ProductSaleForm(ModelForm):
     class Meta:
         model = ProductSale
         fields = ['product', 'quantity']
+
+
+class SupplierForm(ModelForm):
+    class Meta:
+        model = Supplier
+        fields = ['name']

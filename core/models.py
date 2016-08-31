@@ -1,10 +1,20 @@
 from django.db import models
 from django.db.models import Sum
 
+
+class Supplier(models.Model):
+    name = models.CharField(max_length=100)
+    data_register = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     bar_code = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    supplier = models.ForeignKey(Supplier)
 
     def __str__(self):
         return self.description
@@ -89,4 +99,3 @@ class ProductSale(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
     sale = models.ForeignKey(Sale)
-

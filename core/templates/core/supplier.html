@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block main %}
+<h4>Fornecedores</h4>
+<div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
+    <table>
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="barcode">Nome</th>
+                <th data-field="edit">Editar</th>
+            </tr>
+        </thead>
+
+    <tbody>
+    {% for supplier in supplier_list %}
+        <tr>
+            <td>{{supplier.id}}</td>
+            <td>{{supplier.name}}</td>
+            <td>
+                <a href="{% url 'url_core_supplier_update' supplier.id %}">
+                      <i class="material-icons">edit</i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+
+{% block extra_floating_button %}
+<li>
+    <a href="{% url 'url_core_supplier_create' %}"
+        class="btn-floating red darken-1">
+        <i class="material-icons">add</i>
+    </a>
+</li>
+{% endblock %}

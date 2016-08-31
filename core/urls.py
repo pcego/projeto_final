@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from core.views import home, board, entrances, products, product_update, product_create, product_delete, entrance_create, \
     entrance_product_insert, entrance_delete, entrance_update, entrance_product_delete, sales, sale_create, \
-    sale_product_insert, sale_update, sale_product_delete, reports
+    sale_product_insert, sale_update, sale_product_delete, reports, supplier, supplier_create, supplier_delete, \
+    supplier_update
 
 urlpatterns = [
     url(r'^$', home, name='url_core_home'),
@@ -9,9 +10,15 @@ urlpatterns = [
 
     # Product URL's
     url(r'^products/$', products, name='url_core_products'),
-    url(r'^product-add/$', product_create, name='url_core_products_create'),
+    url(r'^product-create/$', product_create, name='url_core_products_create'),
     url(r'^product-update/(?P<id>\d+)$', product_update, name='url_core_product_update'),
     url(r'^product-delete/(?P<id>\d+)$', product_delete, name='url_core_product_delete'),
+
+    # Supplier URL's
+    url(r'^supplier/$', supplier, name='url_core_supplier'),
+    url(r'^supplier-create/$', supplier_create, name='url_core_supplier_create'),
+    url(r'^supplier-update/(?P<id>\d+)$', supplier_update, name='url_core_supplier_update'),
+    url(r'^supplier-delete/(?P<id>\d+)$', supplier_delete, name='url_core_supplier_delete'),
 
     # Entrances URL's
     url(r'^entrances/$', entrances, name='url_core_entrance'),

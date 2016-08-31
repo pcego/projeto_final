@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale
-from core.forms import ProductForm, EntranceForm, ProductEntranceForm, SaleForm, ProductSaleForm
+from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale, Supplier
+from core.forms import ProductForm, EntranceForm, ProductEntranceForm, SaleForm, ProductSaleForm, SupplierForm
 import datetime
 now = datetime.datetime.now()
 
@@ -43,7 +43,7 @@ def product_create(request, template_name='core/product_form.html'):
 
 
 @login_required()
-def product_delete(request, id, template_name='core/product_confirm_delete.html'):
+def product_delete(request, id, template_name='core/confirm_delete.html'):
     product = get_object_or_404(Product, id=id)
     if request.method == 'POST':
         product.delete()
@@ -219,3 +219,38 @@ def reports(request):
     data['total_sales'] = Sale.sales_per_month(month)
     data['total_entrances'] = Entrance.entrances_per_month(month)
     return render(request, 'core/reports.html', data)
+
+
+# Suppliers URL's
+@login_required()
+def supplier(request):
+    data = {'supplier_list': Supplier.objects.all()}
+    return render(request, 'core/supplier.html', data)
+
+
+@login_required()
+def supplier_create(request, template_name='core/supplier_form.html'):
+    form = SupplierForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('url_core_supplier')
+    return render(request, template_name, {'form': form})
+
+
+@login_required()
+def supplier_update(request, id, template_name='core/supplier_form.html'):
+    supplier = get_object_or_404(Supplier, id=id)
+    form = SupplierForm(request.POST or None, instance=supplier)
+    if form.is_valid():
+        form.save()
+        return redirect('url_core_supplier')
+    return render(request, template_name, {'form': form, 'supplier': supplier})
+
+
+@login_required()
+def supplier_delete(request, id, template_name='core/confirm_delete.html'):
+    supplier = get_object_or_404(Supplier, id=id)
+    if request.method == 'POST':
+        supplier.delete()
+        return redirect('url_core_supplier')
+    return render(request, template_name, {'object': supplier})
