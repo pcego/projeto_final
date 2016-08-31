@@ -122,3 +122,4 @@ STATIC_URL = '/static/'
 
 from django.core.urlresolvers import reverse_lazy
 LOGIN_REDIRECT_URL = reverse_lazy('url_core_board')
+LOGIN_URL = '/login/'

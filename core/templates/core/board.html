@@ -5,33 +5,40 @@
 
 
 <div class="row">
-      <div class="col s6">
+      <div class="col s4">
           <a href="{% url 'url_core_products' %}">
-             <img src="{% static 'img/products.png' %}" class="appicon">
-             <h5>Cadastro de produtos</h5>
+              <i class="large material-icons">shopping_basket</i>
+              <h5>Cadastro de produtos</h5>
           </a>
       </div>
 
-    <div class="col s6">
+    <div class="col s4">
         <a href="{% url 'url_core_entrance' %}">
-            <img src="{% static 'img/product_entrance.png' %}" class="appicon">
+            <i class="large material-icons">input</i>
             <h5>Entrada de produtos</h5>
+        </a>
+    </div>
+
+    <div class="col s4">
+        <a href="{% url 'url_core_supplier' %}">
+            <i class="large material-icons">business</i>
+            <h5>Fornecedores </h5>
         </a>
     </div>
 </div>
 
 
 <div class="row">
-      <div class="col s6">
+      <div class="col s4">
           <a href="{% url 'url_core_sales' %}">
-            <img src="{% static 'img/sales.png' %}" class="appicon">
+            <i class="large material-icons">shopping_cart</i>
             <h5>Vendas</h5>
           </a>
       </div>
-      <div class="col s6">
+      <div class="col s4">
           <a href="{% url 'url_core_reports' %}">
-            <img src="{% static 'img/report.png' %}" class="appicon">
-            <h5>Relatórios</h5>
+              <i class="large material-icons">library_books</i>
+              <h5>Relatórios</h5>
            </a>
       </div>
 </div>
