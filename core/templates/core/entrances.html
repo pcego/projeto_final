@@ -3,6 +3,7 @@
 {% block main %}
 
 <div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
+<h4>Entrada de produtos</h4>
     <table>
         <thead>
             <tr>
@@ -34,12 +35,13 @@
 {% endblock %}
 
 
-{% block extra_button %}
+{% block extra_floating_button %}
 <li>
     <a href="{% url 'url_core_entrance_create' %}"
         class="btn-floating red darken-1">
-        <i class="material-icons">format_quote</i>
+        <i class="material-icons">add</i>
     </a>
 </li>
 {% endblock %}
+
 

@@ -81,6 +81,7 @@ class Sale(models.Model):
 
         for sale in sales_list:
             amount += sale.total
+
         return amount
 
 
@@ -88,3 +89,4 @@ class ProductSale(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
     sale = models.ForeignKey(Sale)
+

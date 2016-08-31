@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% block main %}
-
+<h3>Sales</h3>
 <div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
     <table>
         <thead>
@@ -34,12 +34,13 @@
 {% endblock %}
 
 
-{% block extra_button %}
+
+
+{% block extra_floating_button %}
 <li>
-    <a href="{% url 'url_core_entrance_create' %}"
+    <a href="{% url 'url_core_sale_create' %}"
         class="btn-floating red darken-1">
-        <i class="material-icons">format_quote</i>
+        <i class="material-icons">add</i>
     </a>
 </li>
 {% endblock %}
-
