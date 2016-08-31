@@ -26,6 +26,12 @@
                 {% block menu %}
                 {% endblock %}
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'url_core_board' %}">Dashboard</a></li>
+                    <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
+                    <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
+                    <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
+                    <li><a href="{% url 'url_core_sales' %}">Sale</a></li>
+                    <li><a href="{% url 'url_core_reports' %}">Relatórios</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                   <li><a href="{% url 'login' %}">Login</a></li>
@@ -36,6 +42,12 @@
                 {% endblock %}
 
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'url_core_board' %}">Dashboard</a></li>
+                    <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
+                    <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
+                    <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
+                    <li><a href="{% url 'url_core_sales' %}">Sale</a></li>
+                    <li><a href="{% url 'url_core_reports' %}">Relatórios</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                   <li><a href="{% url 'login' %}">Login</a></li>

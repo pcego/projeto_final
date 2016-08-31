@@ -99,3 +99,6 @@ class ProductSale(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
     sale = models.ForeignKey(Sale)
+
+    def __str__(self):
+        return self.product.description
