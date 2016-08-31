@@ -36,3 +36,10 @@ urlpatterns = [
         }, name="logout"),
     url(r'^admin/', admin.site.urls),
 ]
+
+
+
+admin.site.site_header = 'Estoque'
+admin.site.index_title = 'Estoque'
+admin.site.site_header = 'Sistema modelo de gestão de estoque'
+admin.site.site_title = 'Sistema modelo de gestão de estoque'
