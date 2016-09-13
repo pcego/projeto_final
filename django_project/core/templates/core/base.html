@@ -14,16 +14,13 @@
 
 <body>
 
-    {% block paralax %}
-    <!--Just use this block when you want to have a paralax page. In this case we will use this in index.html-->
     <div class="navbar-fixed teal lighten-2">
         <nav>
             <div class="nav-wrapper">
               <a href="/" class="brand-logo">Estoque</a>
               <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
-                {% block menu %}
-                {% endblock %}
+
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'url_core_board' %}">Home</a></li>
                     <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
@@ -37,8 +34,6 @@
                 {% endif %}
               </ul>
               <ul class="side-nav" id="mobile-demo">
-                {% block menu_mobile %}
-                {% endblock %}
 
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'url_core_board' %}">Home</a></li>
@@ -55,11 +50,9 @@
             </div>
           </nav>
     </div>
-    {% endblock %}
 
     <div class="container">
-        {% block main%}
-        {% endblock %}
+        <!--Main here-->
 
         <!-- Floating Menu -->
         <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
@@ -67,8 +60,7 @@
               <i class="large material-icons">mode_edit</i>
             </a>
             <ul>
-                {% block extra_floating_button %}
-                {% endblock %}
+
                     <li><a href="{% url 'url_core_products' %}"
                          class="btn-floating grey darken-2"><i class="material-icons">shopping_basket</i></a></li>
                     <li><a href="{% url 'url_core_entrance' %}"
@@ -81,7 +73,32 @@
         </div>
     </div>
 
-    {% include 'core/footer.html' %}
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Estoque</h5>
+                    <p class="grey-text text-lighten-4">Sistema modelo de gestão de estoque baseado em Python e Django</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Menu</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.python.org" target="_blank">Python</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://djangoproject.com" target="_blank">Django</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/" target="_blank">Materializecss</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Faculdades Santo Agostinho
+                <a class="grey-text text-lighten-4 right"
+                   href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a>
+            </div>
+        </div>
+    </footer>
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

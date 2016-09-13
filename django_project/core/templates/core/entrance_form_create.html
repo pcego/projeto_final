@@ -1,27 +1,137 @@
-{% extends 'core/base.html' %}
 {% load static %}
 
-{% block main %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <title>Sistema modelo de gestão de estoque</title>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-<dir class="row">
-    {% if erros %}
-        <div class="alert alert-danger fade in">
-                {{erros}}
+<body>
+
+    <div class="navbar-fixed teal lighten-2">
+        <nav>
+            <div class="nav-wrapper">
+              <a href="/" class="brand-logo">Estoque</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'url_core_board' %}">Home</a></li>
+                    <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
+                    <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
+                    <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
+                    <li><a href="{% url 'url_core_sales' %}">Vendas</a></li>
+                    <li><a href="{% url 'url_core_reports' %}">Relatórios</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'url_core_board' %}">Home</a></li>
+                    <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
+                    <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
+                    <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
+                    <li><a href="{% url 'url_core_sales' %}">Vendas</a></li>
+                    <li><a href="{% url 'url_core_reports' %}">Relatórios</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+    </div>
+
+    <div class="container">
+        <!--Main here-->
+
+        <dir class="row">
+            {% if erros %}
+                <div class="alert alert-danger fade in">
+                        {{erros}}
+                </div>
+            {% endif %}
+
+            <form METHOD="POST">
+                {%csrf_token%}
+                {{form_entrance}}
+
+                <button class="btn waves-effect waves-light" type="submit" name="action">Continuar
+                <i class="material-icons right">send</i>
+                </button>
+
+
+            </form>
+
+        </dir>
+
+        <!-- Floating Menu -->
+        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large red">
+              <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+
+                    <li><a href="{% url 'url_core_products' %}"
+                         class="btn-floating grey darken-2"><i class="material-icons">shopping_basket</i></a></li>
+                    <li><a href="{% url 'url_core_entrance' %}"
+                         class="btn-floating green"><i class="material-icons">input</i></a></li>
+                    <li><a href="{% url 'url_core_sales' %}"
+                         class="btn-floating blue"><i class="material-icons">shopping_cart</i></a></li>
+                    <li><a href="{% url 'url_core_reports' %}"
+                         class="btn-floating red darken-4"><i class="material-icons">library_books</i></a></li>
+            </ul>
         </div>
-    {% endif %}
+    </div>
 
-    <form METHOD="POST">
-        {%csrf_token%}
-        {{form_entrance}}
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Estoque</h5>
+                    <p class="grey-text text-lighten-4">Sistema modelo de gestão de estoque baseado em Python e Django</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Menu</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.python.org" target="_blank">Python</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://djangoproject.com" target="_blank">Django</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/" target="_blank">Materializecss</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Faculdades Santo Agostinho
+                <a class="grey-text text-lighten-4 right"
+                   href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a>
+            </div>
+        </div>
+    </footer>
 
-        <button class="btn waves-effect waves-light" type="submit" name="action">Continuar
-        <i class="material-icons right">send</i>
-        </button>
-
-
-    </form>
-
-</dir>
-
-
-{% endblock %}
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type='text/javascript'>
+            $(".button-collapse").sideNav();
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+            $(document).ready(function(){
+              $('.parallax').parallax();
+            });
+    </script>
+</body>
+</html>

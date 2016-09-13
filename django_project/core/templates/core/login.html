@@ -1,52 +1,164 @@
-{% extends 'core/base.html' %}
+{% load static %}
 
-{% block main %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <title>Sistema modelo de gestão de estoque</title>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-<div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
+<body>
 
-    <div class="icon-and-title-flex">
-        <h1>Login</h1>
-        <form role="form" action="." method="post">
-           {% csrf_token %} <!-- CSRF token is rendered by Django in forms to avoid CSRF attacks -->
+    <div class="navbar-fixed teal lighten-2">
+        <nav>
+            <div class="nav-wrapper">
+              <a href="/" class="brand-logo">Estoque</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
 
-           <!-- If there are non-field errors in the form,
-                iterate over them one by one and display them.
-            -->
-           {% if form.non_field_errors %}
-            <p class="error">
-  	          {% for error in form.non_field_errors %}
-		            {{ error }}
-		          {% endfor %}
-            </p>
-           {% endif %}
-           <!-- Iterate over the fields in a form and render them  -->
-           {% for field in form %}
-            <div class="form-group">
-              <!-- Render the field label tag -->
-		          {{ field.label_tag }}
-              <!-- If the field is required, display a * next to the field label -->
-              {% if field.field.required %}
-              *
-              {% endif %}
-              <br/>
-              <!-- Render the input field -->
-		          {{ field }}
-		        <!-- Iterate over the field's errors, if any and display
-                 them one by one in a error alert
-            -->
-		        {% if field.errors %}
-		          <p class="error">
-		          {% for error in field.errors %}
-		            {{ error }}
-		          {% endfor %}
-		          </p>
-		        {% endif %}
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'url_core_board' %}">Home</a></li>
+                    <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
+                    <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
+                    <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
+                    <li><a href="{% url 'url_core_sales' %}">Vendas</a></li>
+                    <li><a href="{% url 'url_core_reports' %}">Relatórios</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'url_core_board' %}">Home</a></li>
+                    <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
+                    <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
+                    <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
+                    <li><a href="{% url 'url_core_sales' %}">Vendas</a></li>
+                    <li><a href="{% url 'url_core_reports' %}">Relatórios</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+              </ul>
             </div>
-          {% endfor %}
-    		<input type="submit" class="btn btn-default" value="Submit" />
-   	  </form>
+          </nav>
     </div>
-</div>
 
-{% endblock %}
+    <div class="container">
+        <!--Main here-->
 
+        <div class="wow fadeInUp content-card animated" style="visibility: visible; animation-name: fadeInUp;">
+
+            <div class="icon-and-title-flex">
+                <h1>Login</h1>
+                <form role="form" action="." method="post">
+                   {% csrf_token %} <!-- CSRF token is rendered by Django in forms to avoid CSRF attacks -->
+
+                   <!-- If there are non-field errors in the form,
+                        iterate over them one by one and display them.
+                    -->
+                   {% if form.non_field_errors %}
+                    <p class="error">
+                      {% for error in form.non_field_errors %}
+                            {{ error }}
+                          {% endfor %}
+                    </p>
+                   {% endif %}
+                   <!-- Iterate over the fields in a form and render them  -->
+                   {% for field in form %}
+                    <div class="form-group">
+                      <!-- Render the field label tag -->
+                          {{ field.label_tag }}
+                      <!-- If the field is required, display a * next to the field label -->
+                      {% if field.field.required %}
+                      *
+                      {% endif %}
+                      <br/>
+                      <!-- Render the input field -->
+                          {{ field }}
+                        <!-- Iterate over the field's errors, if any and display
+                         them one by one in a error alert
+                    -->
+                        {% if field.errors %}
+                          <p class="error">
+                          {% for error in field.errors %}
+                            {{ error }}
+                          {% endfor %}
+                          </p>
+                        {% endif %}
+                    </div>
+                  {% endfor %}
+                    <input type="submit" class="btn btn-default" value="Submit" />
+              </form>
+            </div>
+        </div>
+
+
+        <!-- Floating Menu -->
+        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large red">
+              <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+
+                    <li><a href="{% url 'url_core_products' %}"
+                         class="btn-floating grey darken-2"><i class="material-icons">shopping_basket</i></a></li>
+                    <li><a href="{% url 'url_core_entrance' %}"
+                         class="btn-floating green"><i class="material-icons">input</i></a></li>
+                    <li><a href="{% url 'url_core_sales' %}"
+                         class="btn-floating blue"><i class="material-icons">shopping_cart</i></a></li>
+                    <li><a href="{% url 'url_core_reports' %}"
+                         class="btn-floating red darken-4"><i class="material-icons">library_books</i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Estoque</h5>
+                    <p class="grey-text text-lighten-4">Sistema modelo de gestão de estoque baseado em Python e Django</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Menu</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.python.org" target="_blank">Python</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://djangoproject.com" target="_blank">Django</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/" target="_blank">Materializecss</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Faculdades Santo Agostinho
+                <a class="grey-text text-lighten-4 right"
+                   href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a>
+            </div>
+        </div>
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type='text/javascript'>
+            $(".button-collapse").sideNav();
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+            $(document).ready(function(){
+              $('.parallax').parallax();
+            });
+    </script>
+</body>
+</html>

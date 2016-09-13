@@ -1,7 +1,17 @@
-{% extends 'core/base.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <title>{% block title %}Sistema modelo de gestão de estoque{% endblock %}</title>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-{% block paralax %}
 <main>
     <div class="parallax-container">
         <div class="parallax">
@@ -25,10 +35,45 @@
         </div>
     </div>
 </main>
-{% endblock %}
 
-{% block main %}
-{% endblock %}
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Estoque</h5>
+                    <p class="grey-text text-lighten-4">Sistema modelo de gestão de estoque baseado em Python e Django</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Menu</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.python.org" target="_blank">Python</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://djangoproject.com" target="_blank">Django</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/" target="_blank">Materializecss</a></li>
+                        <li><a class="grey-text text-lighten-3" href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Faculdades Santo Agostinho
+                <a class="grey-text text-lighten-4 right"
+                   href="http://github.com/pcego/projeto_final" target="_blank">Repositório</a>
+            </div>
+        </div>
+    </footer>
 
-{% block floating_menu %}
-{% endblock %}
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type='text/javascript'>
+            $(".button-collapse").sideNav();
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+            $(document).ready(function(){
+              $('.parallax').parallax();
+            });
+    </script>
+</body>
+</html>
