@@ -26,7 +26,7 @@
                 {% block menu %}
                 {% endblock %}
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'url_core_board' %}">Dashboard</a></li>
+                    <li><a href="{% url 'url_core_board' %}">Home</a></li>
                     <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
                     <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
                     <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
@@ -42,7 +42,7 @@
                 {% endblock %}
 
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'url_core_board' %}">Dashboard</a></li>
+                    <li><a href="{% url 'url_core_board' %}">Home</a></li>
                     <li><a href="{% url 'url_core_products' %}">Produtos</a></li>
                     <li><a href="{% url 'url_core_supplier' %}">Fornecedores</a></li>
                     <li><a href="{% url 'url_core_entrance' %}">Entradas</a></li>
