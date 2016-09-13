@@ -20,23 +20,15 @@ from django.core.urlresolvers import reverse_lazy
 
 
 urlpatterns = [
-    url(r'^', include('core.urls')),
-    url(r'^login/$', login,
-        {
-            "template_name": "core/login.html",
-        },
-        name="login"),
+    url(r'^', include('django_project.core.urls')),
+    url(r'^login/$', login,{"template_name": "core/login.html",},name="login"),
 
     # Map the 'django.contrib.auth.views.logout' view to the /logout/ URL.
     # Pass additional parameters to the view like the page to show after logout
     # via a dictionary used as the 3rd argument.
-    url(r'^logout/$', logout,
-        {
-            "next_page": reverse_lazy('url_core_home')
-        }, name="logout"),
+    url(r'^logout/$', logout,{"next_page": reverse_lazy('url_core_home')}, name="logout"),
     url(r'^admin/', admin.site.urls),
 ]
-
 
 
 admin.site.site_header = 'Estoque'

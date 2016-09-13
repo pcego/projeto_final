@@ -1,5 +1,6 @@
 from django.contrib import admin
-from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale, Supplier
+from django_project.core.models import Product, Entrance, \
+    ProductEntrance, Sale, ProductSale, Supplier
 
 
 class ProductAdmin(admin.ModelAdmin):

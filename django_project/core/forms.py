@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale, Supplier
+from django_project.core.models import Product, Entrance, \
+    ProductEntrance, Sale, ProductSale, Supplier
 
 
 class ProductForm(ModelForm):

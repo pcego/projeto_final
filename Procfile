@@ -1,0 +1,1 @@
+web: gunicorn fasa.wsgi --log-file -

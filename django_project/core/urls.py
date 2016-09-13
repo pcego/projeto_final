@@ -1,7 +1,10 @@
 from django.conf.urls import url
-from core.views import home, board, entrances, products, product_update, product_create, product_delete, entrance_create, \
-    entrance_product_insert, entrance_delete, entrance_update, entrance_product_delete, sales, sale_create, \
-    sale_product_insert, sale_update, sale_product_delete, reports, supplier, supplier_create, supplier_delete, \
+from django_project.core.views import home, board, entrances, \
+    products, product_update, product_create, product_delete, entrance_create, \
+    entrance_product_insert, entrance_delete, entrance_update, \
+    entrance_product_delete, sales, sale_create, \
+    sale_product_insert, sale_update, sale_product_delete, \
+    reports, supplier, supplier_create, supplier_delete, \
     supplier_update
 
 urlpatterns = [

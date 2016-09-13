@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from core.models import Product, Entrance, ProductEntrance, Sale, ProductSale, Supplier
-from core.forms import ProductForm, EntranceForm, ProductEntranceForm, SaleForm, ProductSaleForm, SupplierForm
+from django_project.core.models import Product, Entrance, \
+    ProductEntrance, Sale, ProductSale, Supplier
+from django_project.core.forms import ProductForm, EntranceForm, \
+    ProductEntranceForm, SaleForm, ProductSaleForm, SupplierForm
+
 import datetime
 now = datetime.datetime.now()
 
