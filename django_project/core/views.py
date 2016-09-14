@@ -8,31 +8,61 @@ from django_project.core.forms import ProductForm, EntranceForm, \
 import datetime
 now = datetime.datetime.now()
 
-
+# declaração da view home
 def home(request):
+    # verifica se o usuário fez login
     if request.user.is_authenticated():
+        # se usuário está logado redireciona
+        # para a url(r'^board/$', board, name='url_core_board')
+        # no arquivo core/urls.py
         return redirect('url_core_board')
+
+    # se o usuário não fez login o django renderiza
+    # o arquivo core/index.html que exibe a página de login
     return render(request, 'core/index.html')
 
 
-@login_required()
+@login_required() # decorador simbolizando que o acesso a esta view é restrito
 def board(request):
     return render(request, 'core/board.html')
 
 
 @login_required()
 def products(request):
+
+    # variável de contexto (um dicionário) padrão chave valor
+    # esta variável recebe todos o produtos cadastrados no bd
+    # representado pela query Products.objects.all()
     data = {'product_list': Product.objects.all()}
+
+    # renderiza o template core/products.html
+    # passando a variável de contexto data para ser processada
+    # através da linguagem de template do django e exibir os dados
     return render(request, 'core/products.html', data)
 
 
+
 @login_required()
+# declaração da view product_update
+# esta view recebe parâmetros adicionais como o id do produto
+# e o template renderizado
 def product_update(request, id, template_name='core/product_form.html'):
+
+    # faz uma select no banco de dados buscando o produto pelo id
+    # se nada for encontrado retorna um erro 404
     product = get_object_or_404(Product, id=id)
+
+    # intancia a variável form que é do tipo ProductForm
     form = ProductForm(request.POST or None, instance=product)
+
+    # verifica se o formulário possui dados válidos
     if form.is_valid():
+        # salva os dados do form na tabela produtos
         form.save()
+        # redireciona para url(r'^products/$', products, name='url_core_products'),
         return redirect('url_core_products')
+
+    # caso o formulaŕio não tenha dados válidos um novo form é instanciado
     return render(request, template_name, {'form': form, 'product': product})
 
 
@@ -47,17 +77,33 @@ def product_create(request, template_name='core/product_form.html'):
 
 @login_required()
 def product_delete(request, id, template_name='core/confirm_delete.html'):
+
+    # recupera um produto pelo id
     product = get_object_or_404(Product, id=id)
+
+    # verifica se o método da requisição é POST
+    # caso seja deleta o produto solicitado
+    # e redireciona para a página produtos
     if request.method == 'POST':
         product.delete()
         return redirect('url_core_products')
+
+    # se a condição não foi satisfeita renderiza o template
+    # passado como parâmetro
     return render(request, template_name, {'object': product})
 
 
-# Entrances views
+# Views entrada
 @login_required()
 def entrances(request):
+
+    # faz uma select *from na tabela de entradas
     data = {'entrances_list': Entrance.objects.all()}
+
+    #renderiza o template passando a variável carregada
+    # com todas a entradas realizadas
+    # esta variável pode ser tratada no template
+    # para exibir seus dados
     return render(request, 'core/entrances.html', data)
 
 

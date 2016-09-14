@@ -2,10 +2,13 @@ from django.forms import ModelForm
 from django_project.core.models import Product, Entrance, \
     ProductEntrance, Sale, ProductSale, Supplier
 
-
+# cria um formulário a partir do modelo (tabela banco de dados)
+# neste caso tabela produtos
 class ProductForm(ModelForm):
     class Meta:
         model = Product
+        # exibe no form os campos listados abaixo
+        # caso queira que o campo nao seja exibido é só não adicionar a lista fields
         fields = ['bar_code', 'description', 'price', 'supplier']
 
 

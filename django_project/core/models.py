@@ -1,24 +1,49 @@
 from django.db import models
 from django.db.models import Sum
 
-
+# classe Supplier herda de models.Model
+# nesta classe você declara os campos da sua tabela de banco
+# e o tipo de cada campo, tamanho e parâmetros adicionais
+# o ORM do django irá se encarregar de ler e criar a tabela
+# com seus devidos campos no seu banco de dados
 class Supplier(models.Model):
+
+    # cria um campo name na tabela supplier
+    # com tamanho máximo igual a 100 e do tipo varchar
     name = models.CharField('fornecedor', max_length=100)
+
+    # cria um campos data_register do tipo date
+    # e carrega o campo por default com a data atual
     data_register = models.DateField('data cadastro', auto_now_add=True)
 
     class Meta:
+
+        # utilizado pelo admin do django para ordenar
+        # os fornecedores pelo nome
         ordering = ['name']
+        # utilizado pelo admin do django
+        # para nomear o campo com um nome escolhdo por você
         verbose_name = 'fornecedor'
+        # nome no plural a ser utilizado pelo admin
         verbose_name_plural = 'fornecedores'
 
+    # retorna o valor do campo name (utilizado pelo admin)
     def __str__(self):
         return self.name
 
-
+# classe para criar a tabela products no bd
 class Product(models.Model):
+    # cria campo do tipo varchar, com tamanho 100, e único
+    # ou seja não é possível cadastrar dois códigos iguais
     bar_code = models.CharField('código barras', max_length=100, unique=True)
     description = models.CharField('descrição', max_length=100)
+    # cria um campo do tipo decimal, maximo de digitos 6
+    # duas casas decimais e por padrão seu valor será zero
     price = models.DecimalField('valor', max_digits=6, decimal_places=2, default=0)
+
+    # cria uma chave estrangeira na tabela products
+    # significa uma relação 1-n ou seja um forncedor possui vários produtos
+    # mas um produto foi fornecido por um forncedor específico
     supplier = models.ForeignKey('Supplier', verbose_name='fornecedor')
 
     class Meta:
@@ -30,13 +55,22 @@ class Product(models.Model):
         return self.description
 
     @property
+    # Método para cálculo do estoque disponível
     def stoq(self):
+
+        # realiza uma query no banco de dados na tabela product_entrance
+        # e filtrando pelo produto, agregando e somando as quantidades
         entrances = ProductEntrance.objects.filter(product=self).aggregate(Sum('quantity'))
+
+        # realiza a mesma query acima mas na tabela sales (vendas)
         sales = ProductSale.objects.filter(product=self).aggregate(Sum('quantity'))
 
+        # condição para verificar se há entrada de um produto ou a venda do mesmo
+        # caso não haja retorna o valor do estoque igual a zero
         if entrances.get('quantity__sum')== None or sales.get('quantity__sum')== None:
             return 0
 
+        # retorna o estoque atual do produto solicitado
         return entrances.get('quantity__sum') - sales.get('quantity__sum')
 
 
@@ -54,7 +88,7 @@ class Entrance(models.Model):
 
     @property
     def total(self):
-        """This property will return the value amount of each entrance"""
+
         total_sum = 0
         entrance_products = ProductEntrance.objects.filter(entrance__id=self.id)
         for item in entrance_products:
