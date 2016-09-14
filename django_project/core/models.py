@@ -125,7 +125,7 @@ class ProductEntrance(models.Model):
 
 class Sale(models.Model):
     sale_number = models.CharField('venda', max_length=20)
-    date = models.DateField('data venda')
+    date = models.DateField('data venda', auto_now_add=True)
     discount = models.DecimalField('desconto', max_digits=6, decimal_places=2)
 
     class Meta:

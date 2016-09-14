@@ -27,7 +27,7 @@ class ProductEntranceForm(ModelForm):
 class SaleForm(ModelForm):
     class Meta:
         model = Sale
-        fields = ['sale_number', 'date', 'discount']
+        fields = ['sale_number', 'discount']
 
 
 class ProductSaleForm(ModelForm):
