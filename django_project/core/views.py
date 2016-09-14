@@ -200,6 +200,7 @@ def sale_create(request, template_name='core/sale_form_create.html'):
         sale = form_sale.save(commit=False)
         sale.save()
         return redirect('url_core_sale_product_insert', id=sale.id)
+
     return render(request, template_name, {'form_sale': form_sale})
 
 

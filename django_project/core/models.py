@@ -137,14 +137,17 @@ class Sale(models.Model):
         return self.sale_number
 
     @property
+    # método para calcular valor total da venda
+    # considerando o desconto
     def total(self):
-        """This property will return the value amount of this sale"""
+
         total_sum = 0
         products = ProductSale.objects.filter(sale__id=self.id)
         for item in products:
-            total_sum += item.product.price * item.quantity
+            total_sum += (item.product.price * item.quantity) - self.discount
         return total_sum
 
+    # método para calcular o valor mensal das vendas
     def sales_per_month(month):
         sales_list = Sale.objects.filter(date__month=month)
 
