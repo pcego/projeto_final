@@ -67,7 +67,10 @@ class Product(models.Model):
 
         # condição para verificar se há entrada de um produto ou a venda do mesmo
         # caso não haja retorna o valor do estoque igual a zero
-        if entrances.get('quantity__sum')== None or sales.get('quantity__sum')== None:
+        if sales.get('quantity__sum')== None:
+            return entrances.get('quantity__sum')
+
+        elif entrances.get('quantity__sum') == None:
             return 0
 
         # retorna o estoque atual do produto solicitado
